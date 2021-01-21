@@ -9,16 +9,34 @@ def prime_nums_reversed(n):
         Note: The ellipsis (...) indicates something you should fill in. It doesn't necessarily imply you should replace it with only one line of code.
     '''
 
-    primes = []
-    sieve = [True] * (n + 1)
-    for p in range(2, n + 1):
-        if (sieve[p]):
-            primes.append(p)
-        for i in range(p ** 2, n + 1, p):
-            sieve[i] = False
+    #primes = []
+    #last_prime = [True] * (n + 1)
+    #for p in range(2, n + 1):
+    #    if (last_prime[p]):
+    #        primes.append(p)
+    #    for i in range(p ** 2, n + 1, p):
+    #       last_prime[i] = False
     
-    primes.reverse()
-    result = " ".join(str(e) for e in primes)
+    #primes.reverse()
+    #result = " ".join(str(e) for e in primes)
+    i = 0
+    j = 0
+    f = 0
+    prime = []
+    for i in range(1, n+1, 1):
+        if i == 1 or i == 0:
+            continue
+        f = 1
+
+        for j in range(2, (i // 2 ) + 1, 1):
+            if i % j == 0:
+                f = 0
+                break
+
+        if flag == 1:
+            prime.append(i)
+    prime.reverse()
+    result = " ".join(str(e) for e in prime)
     return result
 
 
