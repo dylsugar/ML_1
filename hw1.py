@@ -64,20 +64,17 @@ def string_explosion(string):
 
 
 # Question 1(c)
-def consecutive(nums):
+def replace(a, b):
     '''
-        Write a function consecutive that takes in a list of integers and returns True only if the list has two numbers whose difference is 1 next to each other (i.e., n and n+1).
-        >>> consecutive([50, 34, 3, 15])
-        False
-        >>> consecutive([7, 3, 20, 21, 8])
-        True
+        Write a function `replace` that takes in two lists: `a` and `b`, and returns a list where the last element of `a` is replaced by the list `b`.
+
+        >>> replace([1, 2, 3, 4], [5, 6, 7, 8])
+        [1, 2, 3, 5, 6, 7, 8]
+        >>> replace([8, 4, 3], [4, 1, 3, 0, 10])
+        [8, 4, 4, 1, 3, 0, 10]
     '''
-
-    for num in range(len(nums) - 1):
-        if abs(nums[num + 1] - nums[num]) == 1:
-            return True
-    return False
-
+                                                                                                            # PUT YOUR CODE HERE
+    pass    # remove the 'pass'
 
 # Question 2(a)
 
@@ -104,7 +101,6 @@ def bowl_cost(v):
         [0, 5, 3],
         [0, 0, 10],
     ])
-
     # The notation B @ v means: compute the matrix multiplication Bv
     return B @ v
 
