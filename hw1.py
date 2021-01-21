@@ -5,13 +5,21 @@ def prime_nums_reversed(n):
     '''
         Write a function nums_reversed that takes in an integer n and returns a string containing all prime numbers between 1 and n in reverse order, separated by spaces. For example:
             >>> prime_nums_reversed(5)
-            '5 3 2'
+            '5 3 2 1'
         Note: The ellipsis (...) indicates something you should fill in. It doesn't necessarily imply you should replace it with only one line of code.
     '''
 
-    # PUT YOUR CODE HERE
-    pass    # remove the 'pass'
-
+    primes = []
+    sieve = [True] * (n + 1)
+    for p in range(2, n + 1):
+        if (sieve[p]):
+            primes.append(p)
+        for i in range(p ** 2, n + 1, p):
+            sieve[i] = False
+    
+    primes.reverse()
+    result = " ".join(str(e) for e in primes)
+    return result
 
 
 # Question 1(b)
@@ -24,42 +32,48 @@ def string_explosion(string):
         'data!ata!ta!a!!'
         >>> string_explosion('hi')
         'hii'
-
         Hint: Try to use recursion.
     '''
 
-    # PUT YOUR CODE HERE
-    pass    # remove the 'pass'
+def string_explosion(string):
+    if string == '':
+        return ''
+    else:
+        if string == None:
+            return ''
+        else:
+            return string + string_explosion(string[1:])
 
 
 # Question 1(c)
-def replace(a, b):
+def consecutive(nums):
     '''
-        Write a function `replace` that takes in two lists: `a` and `b`, and returns a list where the last element of `a` is replaced by the list `b`.
-
-        >>> replace([1, 2, 3, 4], [5, 6, 7, 8])
-        [1, 2, 3, 5, 6, 7, 8]
-        >>> replace([8, 4, 3], [4, 1, 3, 0, 10])
-        [8, 4, 4, 1, 3, 0, 10]
+        Write a function consecutive that takes in a list of integers and returns True only if the list has two numbers whose difference is 1 next to each other (i.e., n and n+1).
+        >>> consecutive([50, 34, 3, 15])
+        False
+        >>> consecutive([7, 3, 20, 21, 8])
+        True
     '''
 
-    # PUT YOUR CODE HERE
-    pass    # remove the 'pass'
+    for num in range(len(nums) - 1):
+        if abs(nums[num + 1] - nums[num]) == 1:
+            return True
+    return False
 
 
 # Question 2(a)
+
+# v = np.array([1,3,5])
+
 def bowl_cost(v):
     '''
         v is the price vector
         it can take any value like this: np.array([1,3,5])
-
         The store sells the following fruit bowls:
-
-            #1: 4 of each fruit
-            #2: 1 mangos and 3 apricots
-            #3: 4 strawberries and 2 apricots
-            #4: 12 apricots
-
+            #1: 3 of each fruit
+            #2: 2 mangos and 8 apricots
+            #3: 5 strawberries and 3 apricots
+            #4: 10 apricots
         Create a 2-dimensional numpy array encoding the matrix B such that the matrix-vector multiplication
             B x v
         evaluates to a length 4 column vector containing the price of each fruit bowl. 
@@ -67,24 +81,26 @@ def bowl_cost(v):
     '''
 
     B = np.array([
-        # You should fill this in.
+        [3, 3, 3],
+        [2, 0 ,8],
+        [0, 5, 3],
+        [0, 0, 10],
     ])
 
     # The notation B @ v means: compute the matrix multiplication Bv
     return B @ v
+
+# bowl_cost(v)
 
 
 # Question 2(b)
 def amount_spent(v, B):
     '''
         v and B are from the previous question (2a).
-
         Bob, Daniela, and Luke make the following purchases:
-
-        * Bob buys 3 fruit bowl #2's and 2 fruit bowl #3.
-        * Daniela buys 2 of each fruit bowl.
+        * Bob buys 2 fruit bowl #1's and 1 fruit bowl #3.
+        * Daniela buys 1 of each fruit bowl.
         * Luke buys 10 fruit bowl #4s (he really likes apricots).
-
         Create a matrix A such that the matrix expression
             A x B x v
         evaluates to a length 3 column vector containing how much each of them spent. 
@@ -92,23 +108,28 @@ def amount_spent(v, B):
     '''
 
     A = np.array([
-        [0, 3, 2, 0]
-    ]) # Finish this!
-
-    return A @ B @ v
+        [2, 0, 1, 0],
+        [1, 1, 1, 1],
+        [0, 0, 0, 10],
+    ]) 
+    
+    return A @ B @ v 
 
 
 # Question 2(c)
+
+from numpy.linalg import inv
+
 def new_price(A, B, x):
     '''
         A and B are from previous question (2b).
-
         Let's suppose Berkeley Bowl changes their fruit prices, but you don't know what they changed their prices to. 
         Joey, Deb, and Sam buy the same quantity of fruit baskets and the number of fruit in each basket is the same, 
         but now the amount they spent is given by 'x':
-
         Use np.linalg.inv and x to compute the new prices for the individual fruits:
     '''
 
-    new_v = None    # Fill your code here
+    fruit = A @ B
+    fruit_inv = inv(fruit)
+    new_v = fruit_inv @ x
     return new_v
