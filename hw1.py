@@ -12,19 +12,20 @@ def prime_nums_reversed(n):
     j = 0
     f = 0
     prime = []
-    for i in range(1, n+1, 1):
-        if i == 1 or i == 0:
-            continue
-        f = 1
-        for j in range(2, (i // 2) + 1, 1):
-            if i % j == 0:
-                f = 0
-                break
-        if flag == 1:
-            prime.append(i)
-    prime.reverse()
-    result = " ".join(str(e) for e in prime)
-    return result
+    if n != 0 and n!= 1:
+        for i in range(1, n+1, 1):
+            f = 1
+            for j in range(2, (i // 2) + 1, 1):
+                if i % j == 0:
+                    f = 0
+                    break
+            if f == 1:
+                prime.append(i)
+        prime.reverse()
+        result = " ".join(str(e) for e in prime)
+        return result
+    else:
+        return ''
 
 # Question 1(b)
 def string_explosion(string):
@@ -48,7 +49,6 @@ def string_explosion(string):
             return ''
         else:
             return string + string_explosion(string[1:])
-    pass    # remove the 'pass'
 
 
 # Question 1(c)
@@ -63,8 +63,12 @@ def replace(a, b):
     '''
 
     # PUT YOUR CODE HERE
-    pass
-
+    if a:
+        a.pop(len(a)-1)
+        a+=b
+        return a
+    else:
+        return b
 # Question 2(a)
 def bowl_cost(v):
     '''
