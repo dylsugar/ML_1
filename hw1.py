@@ -136,7 +136,7 @@ def new_price(A, B, x):
 
         Use np.linalg.inv and x to compute the new prices for the individual fruits:
     '''
-    fruit = A @ B
-    fruit_inv = inv(fruit)
-    new_v = fruit_inv @ x
+    fruitprice = A @ B
+    singlefruit = inv(fruitprice)
+    new_v = singlefruit @ x
     return new_v
