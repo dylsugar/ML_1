@@ -10,19 +10,18 @@ def prime_nums_reversed(n):
     '''
     i = 0
     j = 0
-    f = 0
+    f = True
     prime = []
     if n != 0 and n!= 1:
         for i in range(1, n+1, 1):
-            f = 1
+            f = False
             for j in range(2, (i // 2) + 1, 1):
                 if i % j == 0:
-                    f = 0
+                    f = True
                     break
-            if f == 1 and i != 1:
+            if f == False and i != 1:
                 prime.append(i)
-        prime.reverse()
-        result = " ".join(str(e) for e in prime)
+        result = " ".join(str(x) for x in prime.reverse())
         return result
     else:
         return ''
