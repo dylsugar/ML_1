@@ -19,7 +19,7 @@ def prime_nums_reversed(n):
                 if i % j == 0:
                     f = 0
                     break
-            if f == 1:
+            if f == 1 and i != 1:
                 prime.append(i)
         prime.reverse()
         result = " ".join(str(e) for e in prime)
@@ -137,6 +137,6 @@ def new_price(A, B, x):
         Use np.linalg.inv and x to compute the new prices for the individual fruits:
     '''
     fruitprice = A @ B
-    singlefruit = inv(fruitprice)
+    singlefruit = np.linalg.inv(fruitprice)
     new_v = singlefruit @ x
     return new_v
